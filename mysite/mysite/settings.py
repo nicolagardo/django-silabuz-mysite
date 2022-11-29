@@ -45,7 +45,8 @@ THIRD_APPS = [
 
 LOCAL_APPS = [
     "mysite",
-    "blog"
+    "blog",
+    "escuela"
 
 ]
 
