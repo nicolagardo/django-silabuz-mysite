@@ -45,8 +45,10 @@ THIRD_APPS = [
 
 LOCAL_APPS = [
     "mysite",
-    "blog"
-
+    "blog",
+    "login",
+    "usuario",
+    "escuela"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS
