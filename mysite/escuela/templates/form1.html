@@ -1,0 +1,9 @@
+<form action="" method="post">
+
+    <!-- <label for="name"> Nombre</label>
+    <input type="text" name="name" id="name" placeholder="Nombre"> -->
+    {% csrf_token %}
+    {{form}}
+    <br>
+    <input type="submit" value="Enviar">
+</form>
