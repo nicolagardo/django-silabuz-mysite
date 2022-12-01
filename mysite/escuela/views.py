@@ -120,5 +120,34 @@ def form_index(request):
         template = "form1.html"
         return render(request, template, contexto)
     return render(request, "form1.html", contexto)
+
+    tf = """
+    Tarea
+Para este taller, crear un formulario en base al modelo Alumno, la ruta para este formulario debe ser /formAlum.
+
+Dentro de los campos se debe tener:
+
+Nombre del alumno
+
+Apellido del alumno
+
+Id del aula a la que pertenece
+
+Luego, cree una ruta dinámica que reciba el nombre del alumno como parámetro. Ejemplo /formAlum/Juan. Además en la ruta dinámica obtenga todos los datos ingresados en el formulario por request.session.
+
+Los datos a recibir dentro de la vista con ruta dinámica son los siguientes:
+
+Apellido del Alumno
+
+Id del aula a la que pertenece
+
+Opcional
+Aplicar la misma lógica del item anterior, pero para el modelo profesor.
+
+Ruta formulario: /formProf
+
+Ruta dinámica; /formProf/<first_name>
+    
+    """
     
 
