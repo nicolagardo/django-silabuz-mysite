@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
+
+from escuela.models import Alumno
 # Create your views here.
-from .forms import InputForm
+from .forms import InputForm, AlumForm
 
 def index_view(request):
     return HttpResponse("Index")
@@ -110,18 +112,60 @@ class IndexViewWithContex2(View):
 
 def form_index(request):
     contexto = {}
+    template = "form1.html"
     #contexto['form'] = InputForm()
     if request.method == "GET":
-        contexto['form'] = InputForm()
+        form = InputForm()
+        contexto ={
+            "form": form}
+
         print("GET")
     elif request.method == "POST":
         print("POST")
-        
-        template = "form1.html"
+        print(str(request.session["aula"])) 
+         
         return render(request, template, contexto)
-    return render(request, "form1.html", contexto)
+    return render(request, template, contexto)
 
-    tf = """
+
+def form_alum(request):
+    template = "formAlumno.html"
+    if request.method == "POST":
+        form = AlumForm(request.POST)
+        if form.is_valid():
+            request.session["last_name"] = form.cleaned_data["last_name"]
+            request.session["name"] = form.cleaned_data["name"]
+            request.session["id_aula"] = form.cleaned_data["id_aula"]
+            name = request.session["last_name"]
+            # alumno = Alumno(first_name= name)
+
+            # alumno.save()
+            print("++++++++++++++++++++++++++")
+            print(request.session["name"])
+            print(request.method)
+            print("++++++++++++++++++++++++++")
+            print(f"Soy {name}")
+            return redirect("formAlum")
+    # elif request.method == "GET":
+    #     print(request.method)
+    #     return HttpResponse("Hola")
+    contexto = {
+        "form": AlumForm()
+                            }
+    return render(request, template, contexto)
+
+def alumD(request, alum):
+    return HttpResponse(
+        request.session["last_name"] +" "+ str(request.session["name"]) +" | id: aula: " + str(request.session["id_aula"]) 
+    )
+
+
+
+
+
+
+
+tf = """
     Tarea
 Para este taller, crear un formulario en base al modelo Alumno, la ruta para este formulario debe ser /formAlum.
 
@@ -151,3 +195,37 @@ Ruta dinámica; /formProf/<first_name>
     """
     
 
+"""
+class form_view(View):
+    template_get = 'form.html'
+    template_post = 'Hola soy POST de form_view'
+
+    def get(self, request):
+        formulario = InputForm()
+        context = {'form': formulario}
+
+        return render(request, self.template_get, context)
+
+    def post(self, request):
+        form = InputForm(request.POST)
+        if form.is_valid():
+            request.session['hora_entrada'] = str(form.cleaned_data['hora_entrada'])
+
+            return redirect('aula_view', aula=form.cleaned_data['aula'])
+
+
+
+"""
+
+"""
+
+class form(View):
+    def get(self,request, aula):
+        hora_entrada = request.session["hora_entrada"]
+
+        return HttpResponse(
+            f"El parámetro enviado por URL es {aula} y recibimos del request el horario en {hora_entrada}"
+        )
+
+
+"""

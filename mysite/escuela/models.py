@@ -39,6 +39,9 @@ class Profesor(Persona):
 class Cargo1(models.Model):
     name_cargo = models.CharField(max_length=20)
 
+    def __str__(self) -> str:
+        return self.name_cargo
+
 class Directivo(Persona):
     cargo = models.ForeignKey(Cargo1, on_delete= models.CASCADE, null= True)
 

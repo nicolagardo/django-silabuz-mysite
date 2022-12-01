@@ -24,16 +24,21 @@ from escuela.views import (
     IndexView2,
     IndexViewWithContex,
     IndexViewWithContex2,
-    form_index)
+    form_index,
+    form_alum,
+    alumD)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     #path("login/", admin.site.urls)
-    path("home", index_view2),
+    path("home", index_view2, name="home"),
     path("home2", IndexView.as_view()),
     path("home3", index_view3),
     path("home4", IndexView2.as_view()),
     path("home5", IndexViewWithContex.as_view()),
     path("solucion2", IndexViewWithContex2.as_view()),
     path("forms1", form_index),
+    path("formAlum", form_alum, name="formAlum"),
+    path("formAlum/<alum>", alumD, name="alum"),
+
 ]
