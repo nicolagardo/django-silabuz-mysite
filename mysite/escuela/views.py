@@ -114,18 +114,23 @@ def form_index(request):
     contexto = {}
     template = "form1.html"
     #contexto['form'] = InputForm()
-    if request.method == "GET":
-        form = InputForm()
+    if request.method == "POST":
+        form = InputForm(request.POST)
         contexto ={
             "form": form}
-
-        print("GET")
-    elif request.method == "POST":
-        print("POST")
-        print(str(request.session["aula"])) 
+        if form.is_valid():
+            name = request.POST
+            print("****")
+            print(name)
+            print("****")
+    # elif request.method == "POST":
+    #     print("POST")
+    #     print("*****")
+    #     print(request.session["aula"])
+        
          
         return render(request, template, contexto)
-    return render(request, template, contexto)
+    #return render(request, template, contexto)
 
 
 def form_alum(request):
@@ -137,15 +142,17 @@ def form_alum(request):
             request.session["name"] = form.cleaned_data["name"]
             request.session["id_aula"] = form.cleaned_data["id_aula"]
             name = request.session["last_name"]
-            # alumno = Alumno(first_name= name)
 
+            #TODO: Para guardar en la bd
+            # alumno = Alumno(first_name= name)
             # alumno.save()
+            
             print("++++++++++++++++++++++++++")
             print(request.session["name"])
             print(request.method)
             print("++++++++++++++++++++++++++")
             print(f"Soy {name}")
-            return redirect("formAlum")
+            return redirect("alum", alum=form.cleaned_data["last_name"])
     # elif request.method == "GET":
     #     print(request.method)
     #     return HttpResponse("Hola")
@@ -153,6 +160,8 @@ def form_alum(request):
         "form": AlumForm()
                             }
     return render(request, template, contexto)
+
+
 
 def alumD(request, alum):
     return HttpResponse(

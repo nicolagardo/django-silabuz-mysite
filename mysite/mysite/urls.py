@@ -38,7 +38,13 @@ urlpatterns = [
     path("home5", IndexViewWithContex.as_view()),
     path("solucion2", IndexViewWithContex2.as_view()),
     path("forms1", form_index),
+
+
+
+
+
+
     path("formAlum", form_alum, name="formAlum"),
-    path("formAlum/<alum>", alumD, name="alum"),
+    path("formAlum/<alum>", alumD, name="alum", ),
 
 ]
