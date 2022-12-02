@@ -14,12 +14,19 @@ def index_view(request):
     return HttpResponse("Index")
 
 def index_view2(request):
+    plantilla = "test.html"
+    contexto = {
+        "title": "soy programador de python",
+        "lista": [1, 2, 3],
+        "saludo": None,
+        "numero":1048576
+    }
     if request.method == "GET":
         print("GET")
     elif request.method == "POST":
         print("POST")
         return HttpResponse("Index Post")
-    return HttpResponse("Index")
+    return render(request, plantilla, contexto)
 
 class IndexView(View):
     def get(self, request):

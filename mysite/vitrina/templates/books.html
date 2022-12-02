@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<ul>
+    <!-- <div style="background-color:'{% cycle: 'blue' 'yellow' %}'"> -->
+        {% for objects in object_list %}
+    
+            <li>{{objects.title}}</li>
+            <li>{{objects.authors}}</li>
+    
+        {% endfor %}
+
+    <!-- </div> -->
+
+</ul>
+
+{% endblock%}

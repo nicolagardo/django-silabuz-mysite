@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class Books(models.Model):
     title = models.CharField(max_length=200)
@@ -19,4 +18,4 @@ class Books(models.Model):
         return self.title
     
     class Meta:
-        db_table = "book"
+        db_table = "books"
