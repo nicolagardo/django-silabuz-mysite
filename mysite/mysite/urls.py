@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 # from escuela.views import (
 #     index_view,
@@ -28,7 +29,7 @@ from django.urls import path
 #     form_alum,
 #     alumD)
 from vitrina.views import BookList
-from myapp2.views import IndexView, BookList2
+from myapp2.views import IndexView, BookList2, select_book, author
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -46,7 +47,10 @@ urlpatterns = [
 
     path("prueba", IndexView.as_view()),
 
-    path("libros2", BookList2.as_view(), name= "libros")
+    path("libros2", (BookList2.as_view()), name= "libros"),
+
+    path("book/<id>", select_book, name = "OneBook"),
+    path("book/<id>/authorbook", author, name = "author")
 
 
 
