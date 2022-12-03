@@ -1,0 +1,14 @@
+{% extends 'base56.html'%}
+
+
+{% block content%}
+<h2> You have {{ numero }} message{{ numero |pluralize }}.</h2>
+<h2> You have {{ numero }} message.</h2>
+<hr>
+<h1>{{ title | capfirst }}</h1>
+<hr>
+<h1>{{ title | upper }}</h1>
+<hr>
+<h1>{{ title | upper | slice:'1:6' }}</h1>
+
+{% endblock %}

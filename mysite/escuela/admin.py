@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import (
     Alumno,
     Profesor,
@@ -7,10 +8,19 @@ from .models import (
 # Register your models here.
 @admin.register(Alumno)
 class AlumnoAdmin(admin.ModelAdmin):
+=======
+
+from .models import Alumno, Directivo, Profesor, Salon, SuperAlumno
+
+# Register your models here.
+@admin.register(Alumno)
+class AlumnAdmin(admin.ModelAdmin):
+>>>>>>> aula07
     list_display = (
         'id',
         'first_name',
         'last_name'
+<<<<<<< HEAD
 
     )
 
@@ -32,3 +42,34 @@ class SalonAdmin(admin.ModelAdmin):
         'hora_entrada',
 
     )
+=======
+    )
+@admin.register(Profesor)
+class ProfeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'first_name'
+    )
+
+@admin.register(Directivo)
+class DireAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'first_name'
+    )
+
+@admin.register(Salon)
+class ProfeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'aula'
+    )
+
+@admin.register(SuperAlumno)
+class SAlumnAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'first_name',
+        'last_name'
+    )
+>>>>>>> aula07

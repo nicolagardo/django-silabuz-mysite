@@ -16,7 +16,46 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# from escuela.views import (
+#     index_view,
+#     index_view2,
+#     IndexView,
+#     index_view3,
+#     IndexView2,
+#     IndexViewWithContex,
+#     IndexViewWithContex2,
+#     form_index,
+#     form_alum,
+#     alumD)
+from vitrina.views import BookList
+from myapp2.views import IndexView, BookList2
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     #path("login/", admin.site.urls)
+    # path("home", index_view2, name="home"),
+    # path("home2", IndexView.as_view()),
+    # path("home3", index_view3),
+    # path("home4", IndexView2.as_view()),
+    # path("home5", IndexViewWithContex.as_view()),
+    # path("solucion2", IndexViewWithContex2.as_view()),
+    # path("forms1", form_index),
+    #path("books", BookList.as_view(), name='book')
+
+
+
+    path("prueba", IndexView.as_view()),
+
+    path("libros2", BookList2.as_view(), name= "libros")
+
+
+
+
+
+
+
+
+    # path("formAlum", form_alum, name="formAlum"),
+    # path("formAlum/<alum>", alumD, name="alum", ),
+
 ]

@@ -4,6 +4,7 @@ from django.db import models
 class Persona(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+<<<<<<< HEAD
     dni = models.CharField(max_length=30)
     email = models.EmailField()
 
@@ -64,6 +65,68 @@ class Salon(models.Model):
 
 b = """
 Creando nuevos modelos
+=======
+    dni = models.CharField(max_length=10)
+    email = models.EmailField()
+
+    def nombre_completo(self):
+        return f'{self.first_name} - {self.last_name}'
+    class Meta:
+        abstract = True
+
+
+class Alumno(Persona):
+    
+    promedio_notas = models.FloatField()
+    asisitencia = models.IntegerField()
+
+class SuperAlumno(Alumno):
+
+    def saludo(self):
+        return f'Hola'
+
+    class Meta:
+        proxy = True    
+
+class Profesor(Persona):
+    salario = models.FloatField(null= True)
+    horas_trabajo = models.IntegerField()
+
+    class Meta:
+        db_table = 'profesor'
+        verbose_name_plural = 'profesores'
+
+
+
+class Cargo1(models.Model):
+    name_cargo = models.CharField(max_length=20)
+
+    def __str__(self) -> str:
+        return self.name_cargo
+
+class Directivo(Persona):
+    cargo = models.ForeignKey(Cargo1, on_delete= models.CASCADE, null= True)
+
+    class Meta:
+        db_table = 'dire'
+
+class Salon(models.Model):
+    id_profesor= models.ForeignKey(Profesor, on_delete=models.CASCADE)
+    aula = models.CharField(max_length=2)
+    hora_entrada = models.TimeField(auto_now=True)
+
+a  = """
+Añadir el id del profesor a la tabla salón para relacionar a un profesor con un salón.
+"""
+
+#alumno = Alumno()
+
+#alumno.nombre_completo()
+
+
+b = """
+
+>>>>>>> aula07
 Cree un modelo Evaluacion la cual será una clase padre, esta deberá tener los siguientes atributos. Recuerde que esta debe ser abstract.
 
 Hora y fecha
@@ -92,4 +155,10 @@ Tema del proyecto: máximo 100 caracteres
 Número de grupos
 
 Del modelo Proyecto crea un modelo proxy, el cual ordena los registros por el tema del proyecto.
+<<<<<<< HEAD
 """
+=======
+"""
+
+
+>>>>>>> aula07

@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+<ul>
+    
+    {% block content%}
+        {% for ob in object_list%}
+            <br>
+            <div style='background-color:{% cycle 'lightblue' 'pink' 'yellow' 'coral' 'grey' %}'>
+
+                <li>{{ ob.title | upper }}</li> 
+                <li>{{ ob.authors}}</li>
+                {% if ob.publisher|length <= 10 %} 
+                <li>{{ ob.publisher }}</li>
+                {% else %}
+                <p>Sin publisher</p>
+                {% endif %} 
+                <li>{{ ob.text_reviews_count }}</li>
+                {% filter upper %}
+                <li>{{ ob.language_code }}</li>
+                {% endfilter %}
+
+            </div>
+            <hr>
+        {% endfor%}
+    
+    {% endblock%}
+</ul>
