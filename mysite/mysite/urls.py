@@ -47,7 +47,7 @@ urlpatterns = [
 
     path("prueba", IndexView.as_view()),
 
-    path("libros2", (BookList2.as_view()), name= "libros"),
+    path("libros2",(BookList2.as_view()), name= "libros"),
 
     path("book/<id>", select_book, name = "OneBook"),
     path("book/<id>/authorbook", author, name = "author")

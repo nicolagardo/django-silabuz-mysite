@@ -1,4 +1,5 @@
 {% extends 'base56.html'%}
+{% csrf_token %}
 
 {% block content %}
 <ul>
@@ -16,4 +17,10 @@
     <li>{{book.isbn}}</li>
     
     </ul>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Enviar">
+    </form>
 {% endblock %}

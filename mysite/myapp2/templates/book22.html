@@ -11,6 +11,7 @@
     <ul>
         {% for ob in object_list %}
             <div style='list-style: none;background-color:{% cycle 'lightblue' 'pink' 'yellow' 'coral' 'grey' %}'>
+                {% csrf_token %}
 
                 {% comment %}
                 {% if ob.title|length < 58 %}

@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views import View
 
 from django.views.generic import ListView
 from vitrina.models import Books
+from .forms import InputForm
 
 from django.views.decorators.cache import cache_page
+from .tasks import send_book
+
 # Create your views here.
 class IndexView(View):
     template = "prueba56.html"
@@ -20,17 +23,24 @@ class BookList2(ListView):
     model = Books
     template_name = 'book22.html'
 
-@cache_page(60*15)
 def book(request):
     pass
 
+#@cache_page(60*15)
 def select_book(request, id):
     template = "oneBook.html"
     book = Books.objects.filter(id= id)
     request.session["authors"] = book[0].authors
     contexto = {
-        "book": book[0]
+        "book": book[0],
+        "form": InputForm()
     }
+    if request.method == "POST":
+        form = InputForm(request.POST)
+        if form.is_valid():
+            send_book.delay(form.cleaned_data["name"], form.cleaned_data["email"])
+            print(form.cleaned_data["name"], form.cleaned_data["email"])
+            return HttpResponse(f'{form.cleaned_data["name"]} {form.cleaned_data["email"]}')
     return render(request, template, contexto)
 
 def author(request, id):
